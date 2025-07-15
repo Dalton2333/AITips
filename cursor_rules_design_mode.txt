@@ -1,0 +1,274 @@
+代码要遵循设计原则：
+下面是软件设计领域中常见的几大原则，能够帮助你写出结构清晰、易维护、灵活扩展的代码：
+
+---
+
+## ✅ SOLID 原则（面向对象设计基础）
+
+1. **单一职责原则（SRP）**
+   一个类/模块只负责一项职责，只有一个引起它变更的原因 ([en.wikipedia.org][1])。
+
+2. **开放–关闭原则（OCP）**
+   对扩展开放，对修改关闭——通过接口或抽象类添加新功能，不要修改已有代码 ([en.wikipedia.org][1])。
+
+3. **里氏替换原则（LSP）**
+   子类型应当可以替换父类型，且行为一致，不破坏程序正确性 。
+
+4. **接口隔离原则（ISP）**
+   不强迫客户端依赖它不需要的接口，将大型接口拆分成多个小接口 。
+
+5. **依赖倒置原则（DIP）**
+   高层模块不依赖低层模块，两者都依赖抽象；抽象不依赖细节，细节依赖抽象 ([dev.to][2])。
+
+---
+
+## 🔄 KISS / DRY / YAGNI 等通用原则
+
+* **KISS（Keep It Simple, Stupid）**
+  保持设计和实现尽可能简洁，避免不必要的复杂度 ([medium.com][3])。
+
+* **DRY（Don’t Repeat Yourself）**
+  消除重复逻辑，复用功能，维护一致性，避免散落改动风险 ([medium.com][4])。
+
+* **YAGNI（You Aren’t Gonna Need It）**
+  不为“未来可能会用”的功能提前设计，先实现当下所需，避免过度设计 ([medium.com][4], [reddit.com][5])。
+
+---
+
+## 🧩 其他重要设计原则
+
+* **关注点分离（Separation of Concerns，SoC）**
+  将不同系统职责拆分到不同模块或层级（如 UI、业务逻辑、数据访问），提升模块性 ([algorythmsolutions.com][6])。
+
+* **Demeter 法则（LoD，最少知道原则）**
+  对象只应与直接相关的“朋友”通信，而不深入访问链式对象，减少耦合 ([scalastic.io][7])。
+
+* **组合优于继承（Composition over Inheritance）**
+  通过更灵活的对象组合方式避免继承层级复杂，提升复用性与可替换性 ([scalastic.io][7])。
+
+* **约定优于配置（Convention over Configuration，CoC）**
+  通过统一约定减少显式配置复杂性，提高生产效率，常见于框架领域 ([scalastic.io][7])。
+
+---
+
+## 🌟 实际应用建议
+
+这些原则并非孤立适用，而是根据上下文做权衡：
+
+* **SRP + DRY**：先让模块职责单一，避免重复逻辑。
+* **OCP + DIP**：通过抽象提高扩展性并减少对实现的耦合。
+* **KISS + YAGNI**：保持系统简洁，只做“现在需要”的事情。
+* **SoC + LoD**：模块清晰，减少层级耦合。
+* **Composition**：替代复杂的继承关系，提升灵活性。
+
+---
+
+## 🧠 实用心法
+
+* 从简单开始，矢量演进（refactor-driven design）。
+* 必要时应用抽象，不为抽象而抽象。YAGNI 是警示，不是禁令 ([reddit.com][5], [dev.to][2], [algorythmsolutions.com][6], [scalastic.io][7])。
+* 多和业务/领域沟通：设计应服务于需求 。
+
+---
+
+### ✅ 小结
+
+| 原则类别                     | 核心理念                   |
+| ------------------------ | ---------------------- |
+| SOLID（5 项）               | 面向对象设计，解耦、扩展、安全替换、接口简洁 |
+| KISS / DRY / YAGNI       | 简洁、高复用、按需实现            |
+| SoC / LoD / CoC / 组合优于继承 | 高内聚、低耦合、更灵活模块化         |
+
+---
+选择合适的设计模式：
+
+以下是对 **23 种经典设计模式** 的 **详细分类-清单与内容说明**，结构分为三大类（创建型、结构型、行为型），并包含各模式的 **意图、适用场景、结构/角色** 等关键信息。
+
+---
+
+## 🛠 创建型模式（Creational Patterns，共 5 种）
+
+用于**管理对象的创建过程**，解耦创建者与使用者：
+
+1. **Singleton（单例模式）**
+
+   * **意图**：确保类只有一个实例，并提供全局访问点。
+   * **内容**：私有构造函数、静态实例、线程安全机制（懒汉、饿汉、双检锁、枚举）([cnblogs.com][1], [zh.wikipedia.org][2])。
+
+2. **Factory Method（工厂方法模式）**
+
+   * **意图**：定义创建对象的接口，但让子类决定哪个类实例化。
+   * **内容**：将对象实例化延迟到子类，实现开放-封闭原则。([zh.wikipedia.org][3], [blog.csdn.net][4], [blog.csdn.net][5])
+
+3. **Abstract Factory（抽象工厂模式）**
+
+   * **意图**：提供一个接口，用于创建相互关联或依赖的一系列对象，无需指定具体类。
+   * **内容**：工厂的工厂，通过接口统一创建同一族产品([zh.wikipedia.org][6], [geeksforgeeks.org][7])。
+
+4. **Builder（建造者模式）**
+
+   * **意图**：将一个复杂对象的构建与其表示分离，使得同样的构建过程可以创建不同的表示。
+   * **内容**：包含 Builder 类与 Director，按步骤创建复杂对象([geeksforgeeks.org][7])。
+
+5. **Prototype（原型模式）**
+
+   * **意图**：通过复制已有实例来创建新对象，降低创建成本。
+   * **内容**：实现 Cloneable 或复制接口，支持浅深拷贝。
+
+---
+
+## 🏗 结构型模式（Structural Patterns，共 7 种）
+
+用于**对象或类的组合组织**，简化接口与结构：
+
+1. **Adapter（适配器模式）**
+
+   * **意图**：将一个类的接口转换成客户端期望的另一种接口。
+   * **内容**：桥接兼容不一致接口；类适配器或对象适配器策略([cnblogs.com][1])。
+
+2. **Bridge（桥接模式）**
+
+   * **意图**：将抽象部分与实现部分分离，使它们可以独立变化。
+   * **内容**：抽象类聚合实现接口，两者分离演化([refactoringguru.cn][8], [geeksforgeeks.org][7])。
+
+3. **Composite（组合模式）**
+
+   * **意图**：将对象组合成树形结构以表示“整体/部分”层次结构。
+   * **内容**：叶子与容器统一接口，递归处理。
+
+4. **Decorator（装饰者模式）**
+
+   * **意图**：动态地为对象添加额外职责。
+   * **内容**：通过包裹方式添加功能，不改变原对象。
+
+5. **Facade（外观模式）**
+
+   * **意图**：为子系统提供统一接口，降低复杂度。
+   * **内容**：创建高层外观封装内部子系统。
+
+6. **Flyweight（享元模式）**
+
+   * **意图**：通过共享机制有效地支持大量细粒度对象。
+   * **内容**：重用共享状态，减少内存占用。
+
+7. **Proxy（代理模式）**
+
+   * **意图**：为其他对象提供一种代理以控制对这个对象的访问。
+   * **内容**：在客户端与真正对象之间插入代理，实现延迟加载、权限控制等。
+
+---
+
+## 🎯 行为型模式（Behavioral Patterns，共 11 种）
+
+用于**对象之间的职责分配和交互方式**：
+
+#### 🧩 1. Chain of Responsibility（责任链模式）
+
+* **意图**：通过一条处理链，将请求逐级传递，直到有对象处理为止。
+* **参与者**：Handler（抽象处理者）、ConcreteHandler（具体处理者）、Client（客户端）。
+
+#### 🧠 2. Command（命令模式）
+
+* **意图**：将请求封装为对象，支持参数化、队列化、撤销等功能。
+* **参与者**：Command（命令接口）、ConcreteCommand（具体命令）、Invoker（调用者）、Receiver（接受者）。([gofpattern.com][2])
+
+#### 🔍 3. Interpreter（解释器模式）
+
+* **意图**：为特定语言定义语法，并编写解释器处理语法树。
+* **参与者**：AbstractExpression、TerminalExpression、NonterminalExpression、Context。([interviewsarehard.readthedocs.io][3], [gofpattern.com][2])
+
+#### 🔄 4. Iterator（迭代器模式）
+
+* **意图**：以统一接口遍历集合元素，不暴露其内部结构。
+* **参与者**：Iterator、ConcreteIterator、Aggregate、ConcreteAggregate。([gofpattern.com][2])
+
+#### 🤝 5. Mediator（中介者模式）
+
+* **意图**：通过引入中介者，封装对象之间的交互，降低耦合。
+* **参与者**：Mediator、ConcreteMediator、Colleague、ConcreteColleague。([zh.wikipedia.org][4], [gofpattern.com][2])
+
+#### 🧠 6. Memento（备忘录模式）
+
+* **意图**：在不破坏封装的前提下，捕获对象内部状态，以便恢复。
+* **参与者**：Originator（创建备忘录）、Memento（备忘录）、Caretaker（管理备忘录）。([gofpattern.com][2])
+
+#### 👀 7. Observer（观察者模式）
+
+* **意图**：定义对象间一对多的依赖，当一个对象状态改变时，自动通知所有依赖者。
+* **参与者**：Subject（被观察者）、ConcreteSubject、Observer（观察者）、ConcreteObserver。([gofpattern.com][2])
+
+#### 🔄 8. State（状态模式）
+
+* **意图**：允许对象在内部状态改变时改变其行为，行为像改变了类。
+* **参与者**：Context（状态容器）、State（抽象状态）、ConcreteState。([gofpattern.com][2])
+
+#### 💡 9. Strategy（策略模式）
+
+* **意图**：定义一系列算法，封装它们并使之可互换。
+* **参与者**：Strategy（策略接口）、ConcreteStrategy（具体策略）、Context。([gofpattern.com][2])
+
+#### 📋 10. Template Method（模板方法模式）
+
+* **意图**：在父类中定义算法骨架，将部分步骤留给子类实现。
+* **参与者**：AbstractClass、ConcreteClass。
+
+#### 🧭 11. Visitor（访问者模式）
+
+* **意图**：将操作与对象结构分离，在不修改对象结构的情况下添加操作。
+* **参与者**：Visitor、ConcreteVisitor、Element、ConcreteElement、ObjectStructure。([gofpattern.com][2])
+
+---
+
+### ✂️ 额外说明
+
+* 行为模式通常分为几类：
+
+  * **沟通型**（如 Observer、Mediator）
+  * **状态型**（如 State、Memento）
+  * **遍历型**（如 Iterator、Visitor） ([oodesign.com][5])
+
+---
+
+### ✅ 总结一览
+
+| 模式                      | 意图简述               |
+| ----------------------- | ------------------ |
+| Chain of Responsibility | 按链传递请求，动态决定谁处理     |
+| Command                 | 封装请求为对象，支持撤销与排队    |
+| Interpreter             | 解析并执行特定语言的语法       |
+| Iterator                | 统一接口遍历集合           |
+| Mediator                | 中央协调对象交互，降低耦合      |
+| Memento                 | 保存/恢复对象状态，实现撤销功能   |
+| Observer                | 发布-订阅通知机制，自动响应状态变化 |
+| State                   | 根据内部状态动态改变行为       |
+| Strategy                | 封装可互换算法，允许运行时切换    |
+| Template Method         | 定义算法框架，交由子类实现细节    |
+| Visitor                 | 解耦对象结构和操作，便于扩展多种行为 |
+
+这些模式是软件设计中处理对象间复杂交互、状态管理与算法封装的利器，有助于编写可维护、灵活和可扩展的系统。
+---
+
+## 📋 设计模式内容结构
+
+每种模式通常包括以下内容：
+
+* **意图（Intent）**：说明它的目的和解决什么问题
+* **动机（Motivation）**：通过示例说明具体应用
+* **结构（Structure）**：类图及对象与接口关系
+* **参与者（Participants）**：模式中各角色（类/接口）及职责
+* **协作（Collaborations）**：各角色之间交互方式
+* **效果（Consequences）**：优点与缺点
+* **适用场景（Applicability）**：何时使用
+* **示例代码（Implementation）**：常用语言演示
+
+---
+
+## 📌 小结表格
+
+| 类型       | 模式                                                                                                                              |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| 创建型 (5)  | Singleton, Factory Method, Abstract Factory, Builder, Prototype                                                                 |
+| 结构型 (7)  | Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy                                                                 |
+| 行为型 (11) | Chain of Responsibility, Command, Iterator, Mediator, Memento, Observer, State, Strategy, Template Method, Visitor, Interpreter |
+
+---
